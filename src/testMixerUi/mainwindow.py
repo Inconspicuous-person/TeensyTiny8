@@ -32,9 +32,8 @@ def display_json_values(json_data):
         #    slider_index = int(key) - 1
 
 
-        levelBar1.setValue(data["1"]*1000)
-        levelBar2.setValue(data["2"]*1000)
-        print(data["2"]*1000)
+        #levelBar1.setValue(data["1"]*1000)
+        #levelBar2.setValue(data["2"]*1000)
 
         #print(f"Displayed JSON values: {data}")
     except json.JSONDecodeError as e:
@@ -53,25 +52,33 @@ def read_serial():
         except Exception as e:
             print(f"Error reading from serial: {e}")
 
+def sendParams():
+    value1 = fader1.value()
+    value2 = fader2.value()
+    value3 = fader3.value()
+    values = {str(1): float(value1), str(2): float(value2), str(3): float(value3), str(4): 0.0, str(5): 0.0, str(6): 0.0, str(7): 0.0, str(8): 0.0, 
+              "matrixIns": {"1": 
+                                {"1": 1*routingWindow.c1i1.isChecked(),
+                                "2": 1*routingWindow.c2i2.isChecked(),
+                                "3": 1*routingWindow.c3i3.isChecked()}
+                            }
+            }
+    send_to_serial(values)
 
-
-
+def inRoutingChanged():
+    sendParams()
 
 def dialInput():
     value = dial.value()
 
 
 def faderChanged():
-    value1 = fader1.value()
-    value2 = fader2.value()
-    value3 = fader3.value()
+    sendParams()
 
-    values = {str(1): float(value1), str(2): float(value2), str(3): float(value3), str(4): 0.0, str(5): 0.0, str(6): 0.0, str(7): 0.0, str(8): 0.0}
-    send_to_serial(values)
 
-    def exit():
+def exit():
 
-        sys.exit()
+    sys.exit()
 
 def setupW():
     window.hide()
@@ -157,6 +164,11 @@ if __name__ == "__main__":
     routingButton.released.connect(lambda: routingW())
 
     routingWindow.setupButton.released.connect(lambda: setupW())
+
+    routingWindow.c1i1.stateChanged.connect(lambda: inRoutingChanged())
+    routingWindow.c2i2.stateChanged.connect(lambda: inRoutingChanged())
+    routingWindow.c3i3.stateChanged.connect(lambda: inRoutingChanged())
+
 
     mixesButton = setupWindow.mixesButton
 

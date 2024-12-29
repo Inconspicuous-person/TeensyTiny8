@@ -527,7 +527,7 @@ color: rgb(0, 0, 0);</string>
       </widget>
      </item>
      <item row="2" column="2">
-      <widget class="QCheckBox" name="checkBox_22">
+      <widget class="QCheckBox" name="c2i2">
        <property name="sizePolicy">
         <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
          <horstretch>0</horstretch>
@@ -846,7 +846,7 @@ color: rgb(0, 0, 0);</string>
       </widget>
      </item>
      <item row="1" column="1">
-      <widget class="QCheckBox" name="checkBox">
+      <widget class="QCheckBox" name="c1i1">
        <property name="sizePolicy">
         <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
          <horstretch>0</horstretch>
@@ -924,7 +924,7 @@ color: rgb(0, 0, 0);</string>
       </widget>
      </item>
      <item row="3" column="3">
-      <widget class="QCheckBox" name="checkBox_18">
+      <widget class="QCheckBox" name="c3i3">
        <property name="sizePolicy">
         <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
          <horstretch>0</horstretch>

@@ -1,12 +1,6 @@
 #include <ArduinoJson.h>
 #include <ArduinoJson.hpp>
-#include "AudioSamplePinkpanther60.h"
-// Advanced Microcontroller_based Audio Workshop
-//
-// http://www.pjrc.com/store/audio_tutorial_kit.html
-// https://hackaday.io/project/8292_microcontroller_audio_workshop_had_supercon_2015
-//
-// Part 2_2: Mixers & Playing Multiple Sounds
+//#include "AudioSamplePinkpanther60.h"
 
 
 JsonDocument doc;
@@ -888,16 +882,20 @@ void setup() {
 
 
   //matrix_in_1.gain(0, 1);
-  //matrix_out_1.gain(0, 1);
+  matrix_out_1.gain(0, 1);
+  matrix_out_1.gain(1, 1);
+  matrix_out_1.gain(2, 1);
+  matrix_out_1.gain(3, 1);
 
-  //matrix_in_3.gain(1, 1);
-  //matrix_out_1.gain(1, 1);
-
+  matrix_out_2.gain(0, 1);
+  matrix_out_2.gain(1, 1);
+  matrix_out_2.gain(2, 1);
+  matrix_out_2.gain(3, 1);
   //matrix_in_3.gain(1, 1);
   //matrix_out_3.gain(1, 1);
 
   //matrix_in_5.gain(2, 1);
-  //matrix_out_1.gain(2, 1);
+  
 
   output_2_gain.gain(1);
   output_1_gain.gain(1);
@@ -906,7 +904,7 @@ void setup() {
   sine1.amplitude(1);
 
   //playSdWav1.play("SDTEST1");
-  playMem1.play(AudioSamplePinkpanther60);
+  //playMem1.play(AudioSamplePinkpanther60); -- VERY IMPORTANT
 }
 
 
@@ -967,6 +965,11 @@ void loop() {
     setInputChannelGain(7, doc["7"]);
     setInputChannelGain(8, doc["8"]);
 
+
+    for (int i = 0; i<4; i++)
+    {
+     matrix_in_1.gain(i, float(doc["matrixIns"]["1"][String(i+1)]));
+    }
 
   }
 }
